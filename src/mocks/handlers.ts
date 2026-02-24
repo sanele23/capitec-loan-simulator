@@ -171,7 +171,7 @@ export const handlers = [
     }
 
     const hasHealthyDisposableIncome = disposableIncome > 1000;
-    const hasHealthyDebtRatio = debtToIncomeRatio < 40;
+    const hasHealthyDebtRatio = debtToIncomeRatio <= 40;
 
     const isEligible =
       hasHealthyDisposableIncome && hasHealthyDebtRatio && !unemployed;
