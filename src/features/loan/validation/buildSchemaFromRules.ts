@@ -42,21 +42,15 @@ export function buildLoanSchema(
 
     existingDebt: z.number().min(0),
 
-    creditScore: z.preprocess(
-      (value) =>
-        value === "" || value === null || Number.isNaN(value)
-          ? undefined
-          : value,
-      z
-        .number()
-        .min(rules.financialInfo.creditScore?.min ?? 300, {
-          message: rules.financialInfo.creditScore?.errorMessage,
-        })
-        .max(rules.financialInfo.creditScore?.max ?? 850, {
-          message: rules.financialInfo.creditScore?.errorMessage,
-        })
-        .optional(),
-    ),
+    creditScore: z
+      .number()
+      .min(rules.financialInfo.creditScore?.min ?? 300, {
+        message: rules.financialInfo.creditScore?.errorMessage,
+      })
+      .max(rules.financialInfo.creditScore?.max ?? 850, {
+        message: rules.financialInfo.creditScore?.errorMessage,
+      })
+      .optional(),
   });
 
   // Calculate effective min/max for requestedAmount and loanTerm based on global rules and selected product constraints

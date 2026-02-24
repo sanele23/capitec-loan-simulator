@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildLoanSchema } from "../validation/buildSchemaFromRules";
@@ -21,9 +21,14 @@ export function LoanForm({
   isSubmitting,
   products,
 }: LoanFormProps) {
-  const [selectedProduct, setSelectedProduct] = useState<
-    LoanProduct | undefined
+  const [selectedProductId, setSelectedProductId] = useState<
+    string | undefined
   >();
+
+  const selectedProduct = useMemo(
+    () => products.find((p) => p.id === selectedProductId),
+    [products, selectedProductId],
+  );
 
   const schema = useMemo(
     () => buildLoanSchema(validationRules, selectedProduct),
@@ -33,19 +38,11 @@ export function LoanForm({
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     mode: "onSubmit",
   });
-
-  const selectedLoanType = watch("loanDetails.loanType");
-
-  useEffect(() => {
-    const product = products.find((p) => p.id === selectedLoanType);
-    setSelectedProduct(product);
-  }, [selectedLoanType, products]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-full">
@@ -177,7 +174,9 @@ export function LoanForm({
         <h2 className="text-lg font-bold mb-2 text-stone-900">Loan Product</h2>
 
         <select
-          {...register("loanDetails.loanType")}
+          {...register("loanDetails.loanType", {
+            onChange: (event) => setSelectedProductId(event.target.value),
+          })}
           className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white"
         >
           <option value="">Select loan product</option>
