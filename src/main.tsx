@@ -7,10 +7,13 @@ import "./index.css";
 const queryClient = new QueryClient();
 
 async function enableMocking() {
-  if (import.meta.env.DEV) {
+  // Only enable mocking in development mode
+  const enableMocking = async () => {
     const { worker } = await import("./mocks/browser");
-    await worker.start();
-  }
+    return worker.start();
+  };
+
+  enableMocking(); // Start the mocking service worker
 }
 
 enableMocking().then(() => {
