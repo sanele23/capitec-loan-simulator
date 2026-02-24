@@ -48,116 +48,137 @@ export function LoanForm({
   }, [selectedLoanType, products]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-2xl">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-full">
       {/* Personal Info */}
       <div>
-        <h2 className="text-lg font-semibold mb-2">Personal Info</h2>
+        <h2 className="text-lg font-bold mb-2 text-stone-900">Personal Info</h2>
 
-        <input
-          type="number"
-          placeholder="Age"
-          {...register("personalInfo.age", { valueAsNumber: true })}
-          className="border p-2 w-full rounded"
-        />
-        {errors.personalInfo?.age && (
-          <p className="text-red-500 text-sm">
-            {errors.personalInfo.age.message}
-          </p>
-        )}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <input
+              type="number"
+              placeholder="Age"
+              {...register("personalInfo.age", { valueAsNumber: true })}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white"
+            />
+            {errors.personalInfo?.age && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.personalInfo.age.message}
+              </p>
+            )}
+          </div>
 
-        <select
-          {...register("personalInfo.employmentStatus")}
-          className="border p-2 w-full rounded mt-2"
-        >
-          <option value="">Select employment status</option>
-          {validationRules.personalInfo.employmentStatus.options?.map(
-            (status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ),
-          )}
-        </select>
-        {errors.personalInfo?.employmentStatus && (
-          <p className="text-red-500 text-sm">
-            {errors.personalInfo.employmentStatus.message}
-          </p>
-        )}
+          <div>
+            <select
+              {...register("personalInfo.employmentStatus")}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white"
+            >
+              <option value="">Select employment status</option>
+              {validationRules.personalInfo.employmentStatus.options?.map(
+                (status) => (
+                  <option key={status} value={status}>
+                    {status}
+                  </option>
+                ),
+              )}
+            </select>
+            {errors.personalInfo?.employmentStatus && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.personalInfo.employmentStatus.message}
+              </p>
+            )}
+          </div>
 
-        <input
-          type="number"
-          placeholder="Employment Duration (months)"
-          {...register("personalInfo.employmentDuration", {
-            valueAsNumber: true,
-          })}
-          className="border p-2 w-full rounded mt-2"
-        />
-        {errors.personalInfo?.employmentDuration && (
-          <p className="text-red-500 text-sm">
-            {errors.personalInfo.employmentDuration.message}
-          </p>
-        )}
+          <div className="md:col-span-2">
+            <input
+              type="number"
+              placeholder="Employment Duration (months)"
+              {...register("personalInfo.employmentDuration", {
+                valueAsNumber: true,
+              })}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white"
+            />
+            {errors.personalInfo?.employmentDuration && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.personalInfo.employmentDuration.message}
+              </p>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Financial Info */}
       <div>
-        <h2 className="text-lg font-semibold mb-2">Financial Info</h2>
+        <h2 className="text-lg font-bold mb-2 text-stone-900">
+          Financial Info
+        </h2>
 
-        <input
-          type="number"
-          placeholder="Monthly Income"
-          {...register("financialInfo.monthlyIncome", {
-            valueAsNumber: true,
-          })}
-          className="border p-2 w-full rounded"
-        />
-        {errors.financialInfo?.monthlyIncome && (
-          <p className="text-red-500 text-sm">
-            {errors.financialInfo.monthlyIncome.message}
-          </p>
-        )}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <input
+              type="number"
+              placeholder="Monthly Income"
+              {...register("financialInfo.monthlyIncome", {
+                valueAsNumber: true,
+              })}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white font-medium"
+            />
+            {errors.financialInfo?.monthlyIncome && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.financialInfo.monthlyIncome.message}
+              </p>
+            )}
+          </div>
 
-        <input
-          type="number"
-          placeholder="Monthly Expenses"
-          {...register("financialInfo.monthlyExpenses", {
-            valueAsNumber: true,
-          })}
-          className="border p-2 w-full rounded mt-2"
-        />
-        {errors.financialInfo?.monthlyExpenses && (
-          <p className="text-red-500 text-sm">
-            {errors.financialInfo.monthlyExpenses.message}
-          </p>
-        )}
+          <div>
+            <input
+              type="number"
+              placeholder="Monthly Expenses"
+              {...register("financialInfo.monthlyExpenses", {
+                valueAsNumber: true,
+              })}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white font-medium"
+            />
+            {errors.financialInfo?.monthlyExpenses && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.financialInfo.monthlyExpenses.message}
+              </p>
+            )}
+          </div>
 
-        <input
-          type="number"
-          placeholder="Existing Debt"
-          {...register("financialInfo.existingDebt", {
-            valueAsNumber: true,
-          })}
-          className="border p-2 w-full rounded mt-2"
-        />
-        {/* Credit Score (Optional) */}
-        <input
-          type="number"
-          placeholder="Credit Score (Optional)"
-          {...register("financialInfo.creditScore", {
-            valueAsNumber: true,
-            setValueAs: (value) =>
-              value === "" || Number.isNaN(value) ? undefined : Number(value), // Convert empty string to undefined for optional field
-          })}
-          className="border p-2 w-full rounded mt-2"
-        />
+          <div>
+            <input
+              type="number"
+              placeholder="Existing Debt"
+              {...register("financialInfo.existingDebt", {
+                valueAsNumber: true,
+              })}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white font-medium"
+            />
+          </div>
+
+          <div>
+            <input
+              type="number"
+              placeholder="Credit Score (Optional)"
+              {...register("financialInfo.creditScore", {
+                setValueAs: (value) =>
+                  value === "" || Number.isNaN(value)
+                    ? undefined
+                    : Number(value),
+              })}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white"
+            />
+          </div>
+        </div>
       </div>
       {/* Product Products */}
       <div>
-        <h2 className="text-lg font-semibold mb-2">Loan Product</h2>
+        <h2 className="text-lg font-bold mb-2 text-stone-900">Loan Product</h2>
 
         <select
           {...register("loanDetails.loanType")}
-          className="border p-2 w-full rounded"
+          className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white"
         >
           <option value="">Select loan product</option>
           {products.map((product) => (
@@ -174,62 +195,69 @@ export function LoanForm({
       </div>
       {/* Loan Details */}
       <div>
-        <h2 className="text-lg font-semibold mb-2">Loan Details</h2>
-        <input
-          type="number"
-          placeholder={
-            selectedProduct
-              ? `Amount (${selectedProduct.minAmount} - ${selectedProduct.maxAmount})`
-              : "Requested Amount"
-          }
-          {...register("loanDetails.requestedAmount", {
-            valueAsNumber: true,
-          })}
-          className="border p-2 w-full rounded"
-        />
-        {errors.loanDetails?.requestedAmount && (
-          <p className="text-red-500 text-sm">
-            {errors.loanDetails.requestedAmount.message}
-          </p>
-        )}
+        <h2 className="text-lg font-bold mb-2 text-stone-900">Loan Details</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <input
+              type="number"
+              placeholder={
+                selectedProduct
+                  ? `Amount (${selectedProduct.minAmount} - ${selectedProduct.maxAmount})`
+                  : "Requested Amount"
+              }
+              {...register("loanDetails.requestedAmount", {
+                valueAsNumber: true,
+              })}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white font-medium"
+            />
+            {errors.loanDetails?.requestedAmount && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.loanDetails.requestedAmount.message}
+              </p>
+            )}
+          </div>
 
-        <input
-          type="number"
-          placeholder={
-            selectedProduct
-              ? `Term (${selectedProduct.minTerm} - ${selectedProduct.maxTerm} months)`
-              : "Loan Term (months)"
-          }
-          {...register("loanDetails.loanTerm", {
-            valueAsNumber: true,
-          })}
-          className="border p-2 w-full rounded mt-2"
-        />
-        {errors.loanDetails?.loanTerm && (
-          <p className="text-red-500 text-sm">
-            {errors.loanDetails.loanTerm.message}
-          </p>
-        )}
+          <div>
+            <input
+              type="number"
+              placeholder={
+                selectedProduct
+                  ? `Term (${selectedProduct.minTerm} - ${selectedProduct.maxTerm} months)`
+                  : "Loan Term (months)"
+              }
+              {...register("loanDetails.loanTerm", {
+                valueAsNumber: true,
+              })}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white font-medium"
+            />
+            {errors.loanDetails?.loanTerm && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.loanDetails.loanTerm.message}
+              </p>
+            )}
+          </div>
 
-        {/* Loan Purpose */}
-        <select
-          {...register("loanDetails.loanPurpose")}
-          className="border p-2 w-full rounded mt-2"
-          disabled={!selectedProduct}
-        >
-          <option value="">Select purpose</option>
-          {selectedProduct?.purposes.map((purpose) => (
-            <option key={purpose} value={purpose}>
-              {purpose.replace("_", " ")}
-            </option>
-          ))}
-        </select>
+          <div className="md:col-span-2">
+            <select
+              {...register("loanDetails.loanPurpose")}
+              className="border border-stone-300 px-4 py-3 w-full rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-200 transition bg-white disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={!selectedProduct}
+            >
+              <option value="">Select purpose</option>
+              {selectedProduct?.purposes.map((purpose) => (
+                <option key={purpose} value={purpose}>
+                  {purpose.replace("_", " ")}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="w-full mt-8 bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-bold text-base transition disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? "Checking..." : "Check Eligibility"}
       </button>

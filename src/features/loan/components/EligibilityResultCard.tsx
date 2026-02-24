@@ -8,18 +8,22 @@ export function EligibilityResultCard({ result }: Props) {
   const { eligibilityResult } = result;
 
   const statusColor =
-    eligibilityResult.riskCategory === "low"
+    result.eligibilityResult.riskCategory === "low"
       ? "bg-green-100 text-green-700"
-      : eligibilityResult.riskCategory === "medium"
+      : result.eligibilityResult.riskCategory === "medium"
         ? "bg-yellow-100 text-yellow-700"
         : "bg-red-100 text-red-700";
 
   return (
-    <div className="mt-8 p-6 border rounded bg-stone-50">
-      <h2 className="text-lg font-semibold mb-4">Eligibility Result</h2>
+    <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 mt-8">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-semibold">Eligibility Result</h2>
 
-      <div className={`inline-block px-3 py-1 rounded text-sm ${statusColor}`}>
-        {eligibilityResult.riskCategory.toUpperCase()} RISK
+        <span
+          className={`px-3 py-1 rounded-full text-sm font-medium ${statusColor}`}
+        >
+          {result.eligibilityResult.riskCategory.toUpperCase()}
+        </span>
       </div>
 
       <p className="mt-4">
